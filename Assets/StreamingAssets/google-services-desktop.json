@@ -1,0 +1,37 @@
+{
+  "client": [
+    {
+      "services": {
+        "appinvite_service": {
+          "status": 0
+        }, 
+        "analytics_service": {
+          "status": 0
+        }
+      }, 
+      "oauth_client": [
+        {
+          "client_id": "145247734917-lo6l2oa6t5pfqq5bi5ugorsspp66pngs.apps.googleusercontent.com"
+        }
+      ], 
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeMEnAz6-wAjMxzf29s1rTnfyjVhx8x1o"
+        }
+      ], 
+      "client_info": {
+        "mobilesdk_app_id": "1:145247734917:ios:ac8fc11bacc492f3", 
+        "android_client_info": {
+          "package_name": "com.findlocation.ios"
+        }
+      }
+    }
+  ], 
+  "configuration_version": "1", 
+  "project_info": {
+    "storage_bucket": "robotic-speech.appspot.com", 
+    "project_id": "robotic-speech", 
+    "firebase_url": "https://robotic-speech.firebaseio.com", 
+    "project_number": "145247734917"
+  }
+}
