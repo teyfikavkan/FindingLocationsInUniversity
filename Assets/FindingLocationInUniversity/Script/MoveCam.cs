@@ -88,6 +88,7 @@ public class MoveCam : MonoBehaviour
                 float fracJourney = distCovered / journeyLength;
                 transform.position = Vector3.Lerp(startMarker.position, endMarker.position, fracJourney);
                 startMarker.position = transform.position;
+
                 transform.rotation = Quaternion.Lerp(startRotation, endRotation, distCovered*11);
                 startMarker.rotation = transform.rotation;
                 if(startMarker.position==endMarker.position)
