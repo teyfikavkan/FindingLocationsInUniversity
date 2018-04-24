@@ -72,12 +72,9 @@ public class NavMeshMove : MonoBehaviour {
     {
         if (_destination != null)
         {
-            Vector3 targetVector = _destination.transform.position;
-            //Debug.Log(targetVector);
-            
+            Vector3 targetVector = _destination.transform.position;            
             _navMeshAgent.SetDestination(targetVector);
             
-
         }
         
 
