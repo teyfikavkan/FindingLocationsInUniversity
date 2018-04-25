@@ -1,6 +1,7 @@
 ﻿using Firebase;
 using Firebase.Database;
 using Firebase.Unity.Editor;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,11 +15,12 @@ public class NavMeshMove : MonoBehaviour {
     Transform _destination ;
     GameObject _location;
     NavMeshAgent _navMeshAgent;
-
+    string location;
     //private GameObject camObj;
     private Transform startMarker;
     private Quaternion startRotation;
     private Quaternion endRotation;
+    private Quaternion endRotation2;
     public float turnSpeed= 0.002F;
     private int turnCnt;
 
@@ -34,14 +36,17 @@ public class NavMeshMove : MonoBehaviour {
         startMarker = GameObject.Find("CamParent").transform;
         startRotation = startMarker.rotation;
         endRotation = Quaternion.Euler(0, -90, 0);
-        
+
+        Debug.Log("Start Rotation :" + startRotation);
+        Debug.Log("End Rotation :" + endRotation);
+
 
         FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://robotic-speech.firebaseio.com/");
         db = FirebaseDatabase.DefaultInstance.GetReference("location");
 
 
-        string location=PlayerPrefs.GetString("LocationID").ToString();
-        _location = GameObject.Find("location1");
+         location=PlayerPrefs.GetString("LocationID").ToString();
+        _location = GameObject.Find(location);
         _destination = _location.transform;
         _navMeshAgent = this.GetComponent<NavMeshAgent>();
         if (_navMeshAgent == null)
@@ -68,6 +73,7 @@ public class NavMeshMove : MonoBehaviour {
             }
             
         }
+      
         else
         {
             Debug.Log("else");
@@ -80,10 +86,31 @@ public class NavMeshMove : MonoBehaviour {
                
                     if (_navMeshAgent.transform.position.y == _destination.transform.position.y)
                     {
-                    
-                        endInformation();
-                        db.SetValueAsync("nolocation");
-                        LoadMenu();
+                        if(turnCnt==1)
+                        {
+                            
+                            startRotation = startMarker.rotation;
+                            //endRotation2 = Quaternion.Euler(0, -180, 0);
+                            setRotation(location);
+
+                            //endRotation2.y = -startRotation.y;
+                            Debug.Log("Start Rotation :" + startRotation);
+                            Debug.Log("End Rotation :" + endRotation2);
+                            
+                            turnCnt = 2;
+                        }
+                        
+                        changeRotation(2);
+                        
+                        if (startMarker.rotation == endRotation2)
+                        {
+                            endInformation();
+                            db.SetValueAsync("nolocation");
+                            LoadMenu();
+                        }
+
+                        
+                        
                     }
                 }
            
@@ -96,6 +123,48 @@ public class NavMeshMove : MonoBehaviour {
 
     }
 
+    private void setRotation(String location)
+    {
+        
+        
+        if (location.Equals("location1"))
+        {
+            endRotation2 = Quaternion.Euler(0, -180, 0);
+        }
+        else if(location.Equals("location3"))
+        {
+            endRotation2 = Quaternion.Euler(0, -180, 0);
+        }
+        else if (location.Equals("location5"))
+        {
+            endRotation2 = Quaternion.Euler(0, -180, 0);
+        }
+        else if (location.Equals("location7"))
+        {
+            endRotation2 = Quaternion.Euler(0, -180, 0);
+        }
+
+
+        else if (location.Equals("location2"))
+        {
+            endRotation2 = Quaternion.Euler(0, 0, 0);
+        }
+        else if (location.Equals("location4"))
+        {
+            endRotation2 = Quaternion.Euler(0, 0, 0);
+        }
+        else if (location.Equals("location6"))
+        {
+            endRotation2 = Quaternion.Euler(0, 0, 0);
+        }
+        else if (location.Equals("location8"))
+        {
+            endRotation2 = Quaternion.Euler(0, 0, 0);
+        }
+
+
+
+    }
 
     private void SetDestination()
     {
@@ -138,7 +207,8 @@ public class NavMeshMove : MonoBehaviour {
         }
         else if(situation==2)
         {
-
+            startMarker.rotation = Quaternion.Lerp(startRotation, endRotation2, turnSpeed);
+            startRotation = startMarker.rotation;
         }
 
     }
