@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class NavMeshMove : MonoBehaviour {
 
@@ -16,7 +17,6 @@ public class NavMeshMove : MonoBehaviour {
     GameObject _location;
     NavMeshAgent _navMeshAgent;
     string location;
-    //private GameObject camObj;
     private Transform startMarker;
     private Quaternion startRotation;
     private Quaternion endRotation;
@@ -24,7 +24,9 @@ public class NavMeshMove : MonoBehaviour {
     public float turnSpeed= 0.002F;
     private int turnCnt;
 
-
+    private GameObject image;
+    public Text text;
+    private string greetingText;
 
     private DatabaseReference db;
 
@@ -32,23 +34,30 @@ public class NavMeshMove : MonoBehaviour {
     void Start()
     {
         turnCnt = 0;
-        //camObj = GameObject.Find("CamParent");
+
+        image = GameObject.Find("SpeechBubbleImg");
+        image.SetActive(false);
+       
         startMarker = GameObject.Find("CamParent").transform;
         startRotation = startMarker.rotation;
         endRotation = Quaternion.Euler(0, -90, 0);
 
-        Debug.Log("Start Rotation :" + startRotation);
-        Debug.Log("End Rotation :" + endRotation);
+        //başlangıçta baloncuğun içindeki yazıyı ayarlama ve yazıyı bastırma.
+        setGreetingText(1);
+        StartCoroutine(startInformation());
 
-
+        //database bağlantısı için
         FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://robotic-speech.firebaseio.com/");
         db = FirebaseDatabase.DefaultInstance.GetReference("location");
 
 
          location=PlayerPrefs.GetString("LocationID").ToString();
+        //location = "location6";
         _location = GameObject.Find(location);
         _destination = _location.transform;
         _navMeshAgent = this.GetComponent<NavMeshAgent>();
+
+
         if (_navMeshAgent == null)
         {
             Debug.LogError("Erorrrr");
@@ -61,22 +70,24 @@ public class NavMeshMove : MonoBehaviour {
     void Update()
     {
         
-        if(turnCnt==0)
+        if(turnCnt==1)
         {
 
             changeRotation(1);
-            if (startMarker.rotation==endRotation)
+            //if (startRotation == endRotation)
+            if(Math.Abs(Math.Abs(endRotation.y) - Math.Abs(startRotation.y)) < 0.01)
             {
-                //Debug.Log("içerde");
+                //Debug.Log("Start Rotation :" + startMarker.rotation);
+                //Debug.Log("End Rotation :" + endRotation);
                 SetDestination();
-                turnCnt = 1;
+                turnCnt = 2;
             }
             
         }
       
-        else
+        else if(turnCnt==2 || turnCnt==3)
         {
-            Debug.Log("else");
+            
             Transform _startdestination = _navMeshAgent.transform;
             if (_navMeshAgent.transform.position.x ==_destination.transform.position.x)
             {
@@ -86,24 +97,24 @@ public class NavMeshMove : MonoBehaviour {
                
                     if (_navMeshAgent.transform.position.y == _destination.transform.position.y)
                     {
-                        if(turnCnt==1)
+                        if(turnCnt==2)
                         {
                             
                             startRotation = startMarker.rotation;
                             //endRotation2 = Quaternion.Euler(0, -180, 0);
                             setRotation(location);
-
-                            //endRotation2.y = -startRotation.y;
-                            Debug.Log("Start Rotation :" + startRotation);
-                            Debug.Log("End Rotation :" + endRotation2);
-                            
-                            turnCnt = 2;
+                            turnCnt = 3;
                         }
-                        
+
+                        Debug.Log("Start Rotation :" + startMarker.rotation);
+                        Debug.Log("End Rotation :" + endRotation2);
                         changeRotation(2);
                         
-                        if (startMarker.rotation == endRotation2)
+                        //if ((startMarker.rotation.y + endRotation2.y)==0)
+                        if (Math.Abs(Math.Abs(endRotation2.y)-Math.Abs(startRotation.y))<0.01)
                         {
+                            //Debug.Log("Start Rotation :" + startMarker.rotation);
+                            //Debug.Log("End Rotation :" + endRotation2);
                             endInformation();
                             db.SetValueAsync("nolocation");
                             LoadMenu();
@@ -123,15 +134,30 @@ public class NavMeshMove : MonoBehaviour {
 
     }
 
+    
+
+    private void SetDestination()
+    {
+        if (_destination != null)
+        {
+            Vector3 targetVector = _destination.transform.position;            
+            _navMeshAgent.SetDestination(targetVector);
+            
+        }
+        
+
+    }
+
+  
     private void setRotation(String location)
     {
-        
-        
+
+
         if (location.Equals("location1"))
         {
             endRotation2 = Quaternion.Euler(0, -180, 0);
         }
-        else if(location.Equals("location3"))
+        else if (location.Equals("location3"))
         {
             endRotation2 = Quaternion.Euler(0, -180, 0);
         }
@@ -166,36 +192,6 @@ public class NavMeshMove : MonoBehaviour {
 
     }
 
-    private void SetDestination()
-    {
-        if (_destination != null)
-        {
-            Vector3 targetVector = _destination.transform.position;            
-            _navMeshAgent.SetDestination(targetVector);
-            
-        }
-        
-
-    }
-
-    public void LoadMenu()
-    {
-        PlayerPrefs.DeleteAll();
-        SceneManager.LoadScene("UniversityPerspective", LoadSceneMode.Single);
-        //Application.LoadLevel("UniversityPerspective");
-        
-    }
-
-    public void startInformation()
-    {
-        //TODO başlangıç için bilgi verecek
-    }
-
-    public void endInformation()
-    {
-        //TODO son için bilgi verecek
-    }
-
     public void changeRotation(int situation)
     {
         if(situation==1)
@@ -212,4 +208,53 @@ public class NavMeshMove : MonoBehaviour {
         }
 
     }
+
+
+
+
+    public void setGreetingText(int situation)
+    {
+        if (situation == 1)
+        {
+            greetingText = "Merhaba";
+        }
+        else if (situation == 2)
+        {
+            greetingText = "Merhaba,ben deneme text bu bir denemedir iki üç bir iki dört";
+        }
+    }
+
+
+    IEnumerator startInformation()
+    {
+        image.SetActive(true);
+
+        for (int i = 0; i < greetingText.Length; i++)
+        {
+
+            text.text += greetingText[i];
+            yield return new WaitForSeconds(0.4f);
+        }
+
+        turnCnt = 1;
+        image.SetActive(false);
+
+
+    }
+
+
+    public void endInformation()
+    {
+        //TODO son için bilgi verecek
+    }
+
+
+    public void LoadMenu()
+    {
+        PlayerPrefs.DeleteAll();
+        SceneManager.LoadScene("UniversityPerspective", LoadSceneMode.Single);
+        //Application.LoadLevel("UniversityPerspective");
+
+    }
+
 }
