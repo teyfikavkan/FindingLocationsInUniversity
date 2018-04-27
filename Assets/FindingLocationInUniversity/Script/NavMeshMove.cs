@@ -27,6 +27,9 @@ public class NavMeshMove : MonoBehaviour {
     private GameObject image;
     public Text text;
     private string greetingText;
+    private int textIterator;
+    private int textCnt;
+    private float textTimer;
 
     private DatabaseReference db;
 
@@ -43,6 +46,8 @@ public class NavMeshMove : MonoBehaviour {
         endRotation = Quaternion.Euler(0, -90, 0);
 
         //başlangıçta baloncuğun içindeki yazıyı ayarlama ve yazıyı bastırma.
+        textCnt = 0;
+        textIterator = 0;
         setGreetingText(1);
         StartCoroutine(startInformation());
 
@@ -52,7 +57,7 @@ public class NavMeshMove : MonoBehaviour {
 
 
          location=PlayerPrefs.GetString("LocationID").ToString();
-        //location = "location6";
+        location = "location6";
         _location = GameObject.Find(location);
         _destination = _location.transform;
         _navMeshAgent = this.GetComponent<NavMeshAgent>();
@@ -63,7 +68,7 @@ public class NavMeshMove : MonoBehaviour {
             Debug.LogError("Erorrrr");
         }
 
-        
+       
     }
 
 
@@ -85,7 +90,7 @@ public class NavMeshMove : MonoBehaviour {
             
         }
       
-        else if(turnCnt==2 || turnCnt==3)
+        else if(turnCnt==2 || turnCnt==3 )
         {
             
             Transform _startdestination = _navMeshAgent.transform;
@@ -106,8 +111,8 @@ public class NavMeshMove : MonoBehaviour {
                             turnCnt = 3;
                         }
 
-                        Debug.Log("Start Rotation :" + startMarker.rotation);
-                        Debug.Log("End Rotation :" + endRotation2);
+                        //Debug.Log("Start Rotation :" + startMarker.rotation);
+                        //Debug.Log("End Rotation :" + endRotation2);
                         changeRotation(2);
                         
                         //if ((startMarker.rotation.y + endRotation2.y)==0)
@@ -115,9 +120,22 @@ public class NavMeshMove : MonoBehaviour {
                         {
                             //Debug.Log("Start Rotation :" + startMarker.rotation);
                             //Debug.Log("End Rotation :" + endRotation2);
-                            endInformation();
-                            db.SetValueAsync("nolocation");
-                            LoadMenu();
+
+                            if(turnCnt==3)
+                            {
+                                setGreetingText(2);
+                                transform.Translate(0, 0, 0.000000001f);
+                                turnCnt = 4;
+                                textTimer = Time.time;
+                                image.SetActive(true);
+                                
+                            }
+                            
+                            
+
+
+
+
                         }
 
                         
@@ -128,6 +146,16 @@ public class NavMeshMove : MonoBehaviour {
             
             
             }
+        }
+
+        else if(turnCnt==4)
+        {
+            endInformation();
+        }
+        else if(turnCnt==5)
+        {
+            db.SetValueAsync("nolocation");
+            LoadMenu();
         }
         
 
@@ -216,11 +244,11 @@ public class NavMeshMove : MonoBehaviour {
     {
         if (situation == 1)
         {
-            greetingText = "Merhaba";
+            greetingText = "Merhaba,Gitmek istediğiniz yer için yol gösterme sekansı başlatılıyor.";
         }
         else if (situation == 2)
         {
-            greetingText = "Merhaba,ben deneme text bu bir denemedir iki üç bir iki dört";
+            greetingText = "Gitmek istediğiniz yer tam olarak burası. Umarım yardımcı olabilmişimdir. Hoşçakalın";
         }
     }
 
@@ -233,9 +261,9 @@ public class NavMeshMove : MonoBehaviour {
         {
 
             text.text += greetingText[i];
-            yield return new WaitForSeconds(0.4f);
+            yield return new WaitForSeconds(0.1f);
         }
-
+        text.text = "";
         turnCnt = 1;
         image.SetActive(false);
 
@@ -243,9 +271,44 @@ public class NavMeshMove : MonoBehaviour {
     }
 
 
+
     public void endInformation()
     {
-        //TODO son için bilgi verecek
+        
+        
+        
+        if(textIterator==greetingText.Length)
+        {
+            if(Math.Abs(Time.time - textTimer)>10)
+            {
+               //Debug.Log("Now :"+Time.time);
+               //Debug.Log("Past :" + textTimer);
+                image.SetActive(false);
+                turnCnt = 5;
+            }
+            
+        }
+        else
+        {
+            if (textCnt == 0 || textCnt == 1 || textCnt == 2 || textCnt == 3 || textCnt == 4)
+            {
+                if (textCnt == 0)
+                {
+                    text.text += greetingText[textIterator];
+                }
+                textCnt += 1;
+            }
+            else
+            {
+                textIterator += 1;
+                textCnt = 0;
+            }
+        }
+    
+        
+        
+
+
     }
 
 
