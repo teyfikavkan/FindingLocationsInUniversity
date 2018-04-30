@@ -57,7 +57,7 @@ public class NavMeshMove : MonoBehaviour {
 
 
          location=PlayerPrefs.GetString("LocationID").ToString();
-        location = "location6";
+        location = "location8";
         _location = GameObject.Find(location);
         _destination = _location.transform;
         _navMeshAgent = this.GetComponent<NavMeshAgent>();
@@ -94,15 +94,21 @@ public class NavMeshMove : MonoBehaviour {
         {
             
             Transform _startdestination = _navMeshAgent.transform;
-            if (_navMeshAgent.transform.position.x ==_destination.transform.position.x)
+            //if (_navMeshAgent.transform.position.x ==_destination.transform.position.x)
+            if(Mathf.Approximately(_navMeshAgent.transform.position.x , _destination.transform.position.x))
             {
-           
-                if (_navMeshAgent.transform.position.z == _destination.transform.position.z)
+                
+                //if (_navMeshAgent.transform.position.z == _destination.transform.position.z)
+                if(Mathf.Approximately(_navMeshAgent.transform.position.z,_destination.transform.position.z))
                 {
-               
-                    if (_navMeshAgent.transform.position.y == _destination.transform.position.y)
+                    
+                    Debug.Log("Fİrst :" + _navMeshAgent.transform.position.y);
+                    Debug.Log("Sec :"+_destination.transform.position.y);
+                    //if (Math.Abs((_navMeshAgent.transform.position.y) - (_destination.transform.position.y))<0.1)
+                    if (Mathf.Approximately(_navMeshAgent.transform.position.y, _destination.transform.position.y))
                     {
-                        if(turnCnt==2)
+                        
+                        if (turnCnt==2)
                         {
                             
                             startRotation = startMarker.rotation;
@@ -116,6 +122,7 @@ public class NavMeshMove : MonoBehaviour {
                         changeRotation(2);
                         
                         //if ((startMarker.rotation.y + endRotation2.y)==0)
+                        //Mathf.Approximately()
                         if (Math.Abs(Math.Abs(endRotation2.y)-Math.Abs(startRotation.y))<0.01)
                         {
                             //Debug.Log("Start Rotation :" + startMarker.rotation);
@@ -183,37 +190,37 @@ public class NavMeshMove : MonoBehaviour {
 
         if (location.Equals("location1"))
         {
-            endRotation2 = Quaternion.Euler(0, -180, 0);
+            endRotation2 = Quaternion.Euler(0, -135, 0);
         }
         else if (location.Equals("location3"))
         {
-            endRotation2 = Quaternion.Euler(0, -180, 0);
+            endRotation2 = Quaternion.Euler(0, -135, 0);
         }
         else if (location.Equals("location5"))
         {
-            endRotation2 = Quaternion.Euler(0, -180, 0);
+            endRotation2 = Quaternion.Euler(0, -135, 0);
         }
         else if (location.Equals("location7"))
         {
-            endRotation2 = Quaternion.Euler(0, -180, 0);
+            endRotation2 = Quaternion.Euler(0, -135, 0);
         }
 
 
         else if (location.Equals("location2"))
         {
-            endRotation2 = Quaternion.Euler(0, 0, 0);
+            endRotation2 = Quaternion.Euler(0, 70, 0);
         }
         else if (location.Equals("location4"))
         {
-            endRotation2 = Quaternion.Euler(0, 0, 0);
+            endRotation2 = Quaternion.Euler(0, 70, 0);
         }
         else if (location.Equals("location6"))
         {
-            endRotation2 = Quaternion.Euler(0, 0, 0);
+            endRotation2 = Quaternion.Euler(0, 70, 0);
         }
         else if (location.Equals("location8"))
         {
-            endRotation2 = Quaternion.Euler(0, 0, 0);
+            endRotation2 = Quaternion.Euler(0, 70, 0);
         }
 
 
