@@ -1,0 +1,222 @@
+fileFormatVersion: 2
+guid: 793d9bdecc9f37d46be9cb848d96ae58
+timeCreated: 1525138518
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Cabinet_Handle1
+    100002: Cabinet_Handle2
+    100004: Cabinet_Handle3
+    100006: CS200___Sink__SS__Single_Compartment__12x28x16_ID1
+    100008: Group1
+    100010: Group10
+    100012: Group11
+    100014: Group12
+    100016: Group13
+    100018: Group14
+    100020: Group2
+    100022: Group3
+    100024: Group4
+    100026: Group5
+    100028: Group6
+    100030: Group7
+    100032: Group8
+    100034: Group9
+    100036: Mesh1
+    100038: Mesh10
+    100040: Mesh11
+    100042: Mesh12
+    100044: Mesh13
+    100046: Mesh14
+    100048: Mesh15
+    100050: Mesh16
+    100052: Mesh17
+    100054: Mesh2
+    100056: Mesh3
+    100058: Mesh4
+    100060: Mesh5
+    100062: Mesh6
+    100064: Mesh7
+    100066: Mesh8
+    100068: Mesh9
+    100070: Modern_Curved_Cast_Metal_Cabinet_Pull_JSB1
+    100072: Modern_Curved_Cast_Metal_Cabinet_Pull_JSB2
+    100074: Modern_Curved_Cast_Metal_Cabinet_Pull_JSB3
+    100076: //RootNode
+    400000: Cabinet_Handle1
+    400002: Cabinet_Handle2
+    400004: Cabinet_Handle3
+    400006: CS200___Sink__SS__Single_Compartment__12x28x16_ID1
+    400008: Group1
+    400010: Group10
+    400012: Group11
+    400014: Group12
+    400016: Group13
+    400018: Group14
+    400020: Group2
+    400022: Group3
+    400024: Group4
+    400026: Group5
+    400028: Group6
+    400030: Group7
+    400032: Group8
+    400034: Group9
+    400036: Mesh1
+    400038: Mesh10
+    400040: Mesh11
+    400042: Mesh12
+    400044: Mesh13
+    400046: Mesh14
+    400048: Mesh15
+    400050: Mesh16
+    400052: Mesh17
+    400054: Mesh2
+    400056: Mesh3
+    400058: Mesh4
+    400060: Mesh5
+    400062: Mesh6
+    400064: Mesh7
+    400066: Mesh8
+    400068: Mesh9
+    400070: Modern_Curved_Cast_Metal_Cabinet_Pull_JSB1
+    400072: Modern_Curved_Cast_Metal_Cabinet_Pull_JSB2
+    400074: Modern_Curved_Cast_Metal_Cabinet_Pull_JSB3
+    400076: //RootNode
+    2100000: FrontColor
+    2100002: M_0102_RoyalBlue
+    2100004: Metal_Aluminum_Anodized
+    2100006: _0010_Snow_1
+    2100008: M_0136_Charcoal
+    2100010: Citi1
+    2300000: Mesh1
+    2300002: Mesh10
+    2300004: Mesh11
+    2300006: Mesh12
+    2300008: Mesh13
+    2300010: Mesh14
+    2300012: Mesh15
+    2300014: Mesh16
+    2300016: Mesh17
+    2300018: Mesh2
+    2300020: Mesh3
+    2300022: Mesh4
+    2300024: Mesh5
+    2300026: Mesh6
+    2300028: Mesh7
+    2300030: Mesh8
+    2300032: Mesh9
+    3300000: Mesh1
+    3300002: Mesh10
+    3300004: Mesh11
+    3300006: Mesh12
+    3300008: Mesh13
+    3300010: Mesh14
+    3300012: Mesh15
+    3300014: Mesh16
+    3300016: Mesh17
+    3300018: Mesh2
+    3300020: Mesh3
+    3300022: Mesh4
+    3300024: Mesh5
+    3300026: Mesh6
+    3300028: Mesh7
+    3300030: Mesh8
+    3300032: Mesh9
+    4300000: Mesh1
+    4300002: Mesh2
+    4300004: Mesh3
+    4300006: Mesh4
+    4300008: Mesh5
+    4300010: Mesh6
+    4300012: Mesh7
+    4300014: Mesh8
+    4300016: Mesh9
+    4300018: Mesh10
+    4300020: Mesh11
+    4300022: Mesh12
+    4300024: Mesh13
+    4300026: Mesh14
+    4300028: Mesh15
+    4300030: Mesh16
+    4300032: Mesh17
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

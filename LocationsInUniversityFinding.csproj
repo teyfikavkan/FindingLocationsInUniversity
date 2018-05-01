@@ -334,6 +334,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\FindingLocationInUniversity\Script\AutoGameAspect.cs" />
+    <Compile Include="Assets\FindingLocationInUniversity\Script\CameraCollision.cs" />
     <Compile Include="Assets\FindingLocationInUniversity\Script\MoveCam.cs" />
     <Compile Include="Assets\FindingLocationInUniversity\Script\NavMeshMove.cs" />
     <Compile Include="Assets\FindingLocationInUniversity\Script\SCS.cs" />
