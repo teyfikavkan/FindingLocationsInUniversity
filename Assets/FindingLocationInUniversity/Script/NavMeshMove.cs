@@ -30,19 +30,27 @@ public class NavMeshMove : MonoBehaviour {
     private int textIterator;
     private int textCnt;
     private float textTimer;
+    private float textTimerStart;
+    private int timerCnt;
 
     private DatabaseReference db;
 
+
+
+    int cntCollider;
     // Use this for initialization
     void Start()
     {
+        cntCollider = 0;
         turnCnt = 0;
-
+        timerCnt = 0;
         image = GameObject.Find("SpeechBubbleImg");
         image.SetActive(false);
        
         startMarker = GameObject.Find("CamParent").transform;
-        startRotation = startMarker.rotation;
+        startRotation = startMarker.localRotation;
+       
+        Debug.Log("startMarker local start :" + startMarker.localRotation);
         endRotation = Quaternion.Euler(0, -90, 0);
 
         //başlangıçta baloncuğun içindeki yazıyı ayarlama ve yazıyı bastırma.
@@ -50,14 +58,14 @@ public class NavMeshMove : MonoBehaviour {
         textIterator = 0;
         setGreetingText(1);
         StartCoroutine(startInformation());
-
+        //turnCnt = 1;
         //database bağlantısı için
         FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://robotic-speech.firebaseio.com/");
         db = FirebaseDatabase.DefaultInstance.GetReference("location");
 
 
          location=PlayerPrefs.GetString("LocationID").ToString();
-        location = "location8";
+         location = "location8";
         _location = GameObject.Find(location);
         _destination = _location.transform;
         _navMeshAgent = this.GetComponent<NavMeshAgent>();
@@ -77,13 +85,17 @@ public class NavMeshMove : MonoBehaviour {
         
         if(turnCnt==1)
         {
-
+            //Debug.Log("start :" + startRotation);
+            //Debug.Log("end :" + endRotation);
             changeRotation(1);
             //if (startRotation == endRotation)
+
             if(Math.Abs(Math.Abs(endRotation.y) - Math.Abs(startRotation.y)) < 0.01)
+            //if(Mathf.Approximately(endRotation.y,startRotation.y))
             {
                 //Debug.Log("Start Rotation :" + startMarker.rotation);
                 //Debug.Log("End Rotation :" + endRotation);
+                Debug.Log("startMarker local end :" + startMarker.localRotation);
                 SetDestination();
                 turnCnt = 2;
             }
@@ -101,19 +113,23 @@ public class NavMeshMove : MonoBehaviour {
                 //if (_navMeshAgent.transform.position.z == _destination.transform.position.z)
                 if(Mathf.Approximately(_navMeshAgent.transform.position.z,_destination.transform.position.z))
                 {
-                    
-                    Debug.Log("Fİrst :" + _navMeshAgent.transform.position.y);
-                    Debug.Log("Sec :"+_destination.transform.position.y);
+                    //Debug.Log("burda0");
+                    //Debug.Log("Fİrst :" + _navMeshAgent.transform.position.y);
+                    //Debug.Log("Sec :"+_destination.transform.position.y);
                     //if (Math.Abs((_navMeshAgent.transform.position.y) - (_destination.transform.position.y))<0.1)
                     if (Mathf.Approximately(_navMeshAgent.transform.position.y, _destination.transform.position.y))
                     {
                         
+
+                        //Debug.Log("burda1");
                         if (turnCnt==2)
                         {
                             
                             startRotation = startMarker.rotation;
                             //endRotation2 = Quaternion.Euler(0, -180, 0);
                             setRotation(location);
+                            Debug.Log("startMarker local start 2 :" + startMarker.localRotation);
+                            //Debug.Log("burda2");
                             turnCnt = 3;
                         }
 
@@ -130,8 +146,9 @@ public class NavMeshMove : MonoBehaviour {
 
                             if(turnCnt==3)
                             {
+                                Debug.Log("startMarker local end 2 :" + startMarker.localRotation);
+                                
                                 setGreetingText(2);
-                                transform.Translate(0, 0, 0.000000001f);
                                 turnCnt = 4;
                                 textTimer = Time.time;
                                 image.SetActive(true);
@@ -190,7 +207,7 @@ public class NavMeshMove : MonoBehaviour {
 
         if (location.Equals("location1"))
         {
-            endRotation2 = Quaternion.Euler(0, -135, 0);
+            endRotation2 = Quaternion.Euler(0, -100, 0);
         }
         else if (location.Equals("location3"))
         {
@@ -231,15 +248,17 @@ public class NavMeshMove : MonoBehaviour {
     {
         if(situation==1)
         {
-           
-            startMarker.rotation = Quaternion.Lerp(startRotation, endRotation, turnSpeed);
+            
+            startMarker.rotation = Quaternion.Slerp(startRotation, endRotation, turnSpeed);
             startRotation = startMarker.rotation;
 
         }
         else if(situation==2)
         {
-            startMarker.rotation = Quaternion.Lerp(startRotation, endRotation2, turnSpeed);
+            startMarker.rotation = Quaternion.Slerp(startRotation, endRotation2, turnSpeed);
             startRotation = startMarker.rotation;
+            //Debug.Log("startMarker local :" + startMarker.localRotation);
+            //Debug.Log("endRotation :" + endRotation2);
         }
 
     }
@@ -255,7 +274,7 @@ public class NavMeshMove : MonoBehaviour {
         }
         else if (situation == 2)
         {
-            greetingText = "Gitmek istediğiniz yer tam olarak burası. Umarım yardımcı olabilmişimdir. Hoşçakalın";
+            greetingText = "Gitmek istediğiniz laboratuvar burası. Hoşçakalın.";
         }
     }
 
@@ -270,6 +289,7 @@ public class NavMeshMove : MonoBehaviour {
             text.text += greetingText[i];
             yield return new WaitForSeconds(0.1f);
         }
+        yield return new WaitForSeconds(2f);
         text.text = "";
         turnCnt = 1;
         image.SetActive(false);
@@ -283,10 +303,14 @@ public class NavMeshMove : MonoBehaviour {
     {
         
         
-        
+        if(timerCnt==0)
+        {
+            textTimerStart = Time.time;
+            timerCnt = 1;
+        }
         if(textIterator==greetingText.Length)
         {
-            if(Math.Abs(Time.time - textTimer)>10)
+            if(Math.Abs(Time.time - textTimer)>10f)
             {
                //Debug.Log("Now :"+Time.time);
                //Debug.Log("Past :" + textTimer);
@@ -297,19 +321,15 @@ public class NavMeshMove : MonoBehaviour {
         }
         else
         {
-            if (textCnt == 0 || textCnt == 1 || textCnt == 2 || textCnt == 3 || textCnt == 4)
+            if (Math.Abs(Time.time - textTimerStart) > 0.05)
             {
-                if (textCnt == 0)
-                {
-                    text.text += greetingText[textIterator];
-                }
-                textCnt += 1;
-            }
-            else
-            {
+                text.text += greetingText[textIterator];
                 textIterator += 1;
-                textCnt = 0;
+                textTimerStart = Time.time;
+                //Debug.Log(text.text);
+             
             }
+           
         }
     
         
@@ -326,5 +346,26 @@ public class NavMeshMove : MonoBehaviour {
         //Application.LoadLevel("UniversityPerspective");
 
     }
+
+   
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    Debug.Log("Çarptı :"+ other.gameObject.name);
+        
+    //    if (other.gameObject.name=="Object_175")
+    //    {
+    //        if(cntCollider==0)
+    //        {
+    //            other.gameObject.GetComponent<Renderer>().enabled=false;
+    //            cntCollider = 1;
+    //        }
+    //        else
+    //        {
+    //            other.gameObject.GetComponent<Renderer>().enabled = true;
+    //        }
+            
+    //    }
+        
+    //}
 
 }

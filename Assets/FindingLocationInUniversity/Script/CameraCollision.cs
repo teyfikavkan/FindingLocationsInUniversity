@@ -14,7 +14,10 @@ public class CameraCollision : MonoBehaviour {
 		Vector3 camPos = transform.position;
 		Vector3 charToCam = camPos - charPos;
 		defaultCamDistance = charToCam.magnitude;
-	}
+        //Debug.Log("Camp Position :" + camPos);
+        
+       
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -26,23 +29,26 @@ public class CameraCollision : MonoBehaviour {
 		Vector3 charToCam = camPos - charPos;
 
 		//int mapLayer = LayerMask.NameToLayer("Map");
-		int mapLayerMask = LayerMask.GetMask(new string[] { "Map" });
+		int mapLayerMask = LayerMask.GetMask(new string[] { "Camera Wall" });
 
 
 		float distance = defaultCamDistance;
+        //Debug.Log("Camp Position :" + camPos);
+        //Debug.Log("Distance :" + distance);
 		
 		Debug.DrawRay(charPos, charToCam.normalized * distance, Color.magenta, 0, false);
 		
-		if (Physics.Raycast(charPos, charToCam.normalized, out hit, distance, mapLayerMask))
+		if (Physics.Raycast(charPos, charToCam.normalized, out hit, distance))
 		{
-			Debug.Log("camera hit " + hit.collider);
+			//Debug.Log("camera hit " + hit.collider);
 			Vector3 newCamPos = hit.point + -0.5f * charToCam.normalized;
 			//Debug.DrawLine(charPos, newCamPos, Color.magenta, 0, false);
 			transform.position = newCamPos;
 		}
 		else
 		{
-			transform.localPosition = defaultCamLocalPos;
+            
+            transform.localPosition = defaultCamLocalPos;
 		}
 	}
 }
