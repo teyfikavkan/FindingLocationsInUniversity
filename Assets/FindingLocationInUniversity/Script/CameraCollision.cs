@@ -14,7 +14,7 @@ public class CameraCollision : MonoBehaviour {
 		Vector3 camPos = transform.position;
 		Vector3 charToCam = camPos - charPos;
 		defaultCamDistance = charToCam.magnitude;
-        //Debug.Log("Camp Position :" + camPos);
+        
         
        
     }
@@ -47,7 +47,6 @@ public class CameraCollision : MonoBehaviour {
 		}
 		else
 		{
-            
             transform.localPosition = defaultCamLocalPos;
 		}
 	}

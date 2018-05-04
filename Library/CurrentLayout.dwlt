@@ -105,10 +105,10 @@ MonoBehaviour:
     y: 30
     width: 1366
     height: 635
-  m_MinSize: {x: 583, y: 342}
-  m_MaxSize: {x: 12008, y: 8042}
+  m_MinSize: {x: 583, y: 492}
+  m_MaxSize: {x: 14004, y: 14042}
   vertical: 1
-  controlID: 1735
+  controlID: 73
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -129,10 +129,10 @@ MonoBehaviour:
     y: 0
     width: 1366
     height: 635
-  m_MinSize: {x: 583, y: 342}
-  m_MaxSize: {x: 12008, y: 8042}
+  m_MinSize: {x: 583, y: 492}
+  m_MaxSize: {x: 14004, y: 14042}
   vertical: 0
-  controlID: 1736
+  controlID: 74
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -153,10 +153,10 @@ MonoBehaviour:
     y: 0
     width: 1082
     height: 635
-  m_MinSize: {x: 306, y: 342}
-  m_MaxSize: {x: 8006, y: 8042}
+  m_MinSize: {x: 306, y: 492}
+  m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 1737
+  controlID: 75
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -180,7 +180,7 @@ MonoBehaviour:
   m_MinSize: {x: 306, y: 221}
   m_MaxSize: {x: 8006, y: 4021}
   vertical: 0
-  controlID: 1738
+  controlID: 76
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -199,8 +199,8 @@ MonoBehaviour:
     y: 0
     width: 412
     height: 364
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -249,14 +249,14 @@ MonoBehaviour:
     y: 364
     width: 1082
     height: 271
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_ActualView: {fileID: 16}
+  m_MinSize: {x: 232, y: 271}
+  m_MaxSize: {x: 10002, y: 10021}
+  m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 15}
   - {fileID: 16}
-  m_Selected: 1
-  m_LastSelected: 0
+  m_Selected: 0
+  m_LastSelected: 1
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -312,14 +312,14 @@ MonoBehaviour:
     height: 343
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SceneLighting: 1
-  lastFramingTime: 25058.639318376026
+  lastFramingTime: 7465.100506508842
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -58.90231, y: -21.140585, z: -81.768265}
+    m_Target: {x: -15.982, y: -20.23432, z: -17.365}
     speed: 2
-    m_Value: {x: -58.90231, y: -21.140585, z: -81.768265}
+    m_Value: {x: -15.982, y: -20.23432, z: -17.365}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -343,13 +343,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: 0.0073192315, y: 0.94518244, z: 0.021234913, w: -0.3257695}
+    m_Target: {x: -0.061344415, y: -0.9250507, z: 0.16980135, w: -0.33419412}
     speed: 2
-    m_Value: {x: 0.0073192315, y: 0.94518244, z: 0.021234913, w: -0.3257695}
+    m_Value: {x: -0.061344415, y: -0.9250507, z: 0.16980135, w: -0.33419412}
   m_Size:
-    m_Target: 92.48013
+    m_Target: 22
     speed: 2
-    m_Value: 92.48013
+    m_Value: 22
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -390,9 +390,9 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 9efbffff
-    m_LastClickedID: -1122
-    m_ExpandedIDs: 9efbffff00000000c25a000002780000927e0000
+    m_SelectedIDs: 
+    m_LastClickedID: 0
+    m_ExpandedIDs: 56fdfaffc016fcffc4f1ffff42f3ffff9efbfffff4ffffff00000000088c0000a68d0000948e00006c8f000016970000a8a4000070a90000aeae0000c8b300009ebc000092c30000dccd0000c6cf0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -413,7 +413,7 @@ MonoBehaviour:
   m_ExpandedScenes:
   - UniversityInside
   m_CurrenRootInstanceID: 0
-  m_Locked: 1
+  m_Locked: 0
   m_CurrentSortingName: TransformSorting
 --- !u!114 &15
 MonoBehaviour:
@@ -454,19 +454,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/FindingLocationInUniversity/Script
+    - Assets
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/FindingLocationInUniversity/Script
+  - Assets
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\ASUS\Documents\LocationsInUniversityFinding
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 59}
-    m_SelectedIDs: 98430000
-    m_LastClickedID: 17304
-    m_ExpandedIDs: 00000000f8270000e8350000363600004a36000080360000fa3700000446000060c9000062c9000000ca9a3bffffff7f
+    m_SelectedIDs: f8270000
+    m_LastClickedID: 10232
+    m_ExpandedIDs: 00000000f8270000e8350000363600004a36000080360000fa37000004460000587200005a72000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -494,7 +494,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000f8270000e8350000363600004a36000080360000fa3700000446000060c9000062c9000000ca9a3bffffff7f
+    m_ExpandedIDs: 00000000f8270000e8350000363600004a36000080360000fa37000004460000587200005a720000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -519,8 +519,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: c25a0000
-    m_LastClickedInstanceID: 23234
+    m_SelectedInstanceIDs: 
+    m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c62300009e270000c0aa0600fc27000004280000602800008a3b0000
     m_RenameOverlay:
