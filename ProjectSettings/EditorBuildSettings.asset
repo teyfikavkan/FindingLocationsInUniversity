@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/UniversityInside.unity
-    guid: d2d5111f2652f0047ac5427e2efcd736
-  - enabled: 1
     path: Assets/UniversityPerspective.unity
     guid: dcef07a844b5e9c44b411d7f769118f6
+  - enabled: 1
+    path: Assets/UniversityInside.unity
+    guid: d2d5111f2652f0047ac5427e2efcd736

@@ -12,6 +12,7 @@ public class MoveCam : MonoBehaviour
     public Transform startMarker;
     public Transform endMarker;
     public GameObject greetingMessageObj;
+    
 
     public float speed = 1.0F;
     private float startTime;
@@ -44,22 +45,11 @@ public class MoveCam : MonoBehaviour
         startCnt = 0;
         greetingCnt = 0;
         startTimeCnt = 0;
-
+       
         FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://robotic-speech.firebaseio.com/");
         db = FirebaseDatabase.DefaultInstance.GetReference("location");
 
-
-        //greetingMessageObj = GameObject.Find("greetingMessage");
-        //greetingMessageObj.SetActive(false);
-
-
-        //rend = obj.GetComponent<Renderer>();
-
-
-        //Debug.Log("rend "+rend.enabled);
-        //Debug.Log("anim "+anim.enabled);
-        //rend.enabled = false;
-        //anim.enabled = false;
+        
 
         journeyLength = Vector3.Distance(startMarker.position, endMarker.position);
         startRotation = startMarker.rotation;
@@ -86,15 +76,21 @@ public class MoveCam : MonoBehaviour
             {
                 float distCovered = (Time.time - startTime) * speed;
                 float fracJourney = distCovered / journeyLength;
-                transform.position = Vector3.Lerp(startMarker.position, endMarker.position, fracJourney);
-                startMarker.position = transform.position;
+                
+                
 
-                transform.rotation = Quaternion.Lerp(startRotation, endRotation, distCovered*11);
+                transform.rotation = Quaternion.Lerp(startRotation, endRotation, distCovered*12.8f);
                 startMarker.rotation = transform.rotation;
-                if(startMarker.position==endMarker.position)
+                if(startMarker.rotation.x != 0)
+                {
+                    transform.position = Vector3.Lerp(startMarker.position, endMarker.position, fracJourney * 1.01f);
+                    startMarker.position = transform.position;
+                }
+
+                if(startMarker.rotation.x==0)
                 {
                     greatingMessage();
-                    
+
                     if(greetingMessageObj.transform.position.y == (float)-1.929 )
                     {
                         
@@ -104,7 +100,7 @@ public class MoveCam : MonoBehaviour
                             startTimeCnt = 1;
                         }
                         
-                        if (Time.time-startDelayTime>3)
+                        if ((int)(Math.Abs(Time.time-startDelayTime))>3)
                         {
                             LoadMenu();
                         }
@@ -165,6 +161,7 @@ public class MoveCam : MonoBehaviour
     public void LoadMenu()
     {
         SceneManager.LoadScene("UniversityInside", LoadSceneMode.Single);
+        //Application.LoadLevel("UniversityInside");
         PlayerPrefs.DeleteAll();
         PlayerPrefs.SetString("LocationID", tempHasLocation);
     }

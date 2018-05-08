@@ -25,17 +25,19 @@ public class NavMeshMove : MonoBehaviour {
     private DatabaseReference db;
 
     public float turnSpeed= 0.002F;
+    private float tempSpeed;
     private int turnCnt;
     private int textIterator;
     private float textTimer;
     private float textTimerStart;
     private int timerCnt;
     private string greetingText;
-    
-    
-    
+    private int cntOnce;
+    private float rotDestination;
+
     void Start()
     {
+        
         startMarker = GameObject.Find("CamParent").transform;
         image = GameObject.Find("SpeechBubbleImg");
         image.SetActive(false);
@@ -43,14 +45,15 @@ public class NavMeshMove : MonoBehaviour {
         turnCnt = 0;
         timerCnt = 0;
         textIterator = 0;
+        cntOnce = 1;
+        tempSpeed = turnSpeed;
 
-        
         FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://robotic-speech.firebaseio.com/");
         db = FirebaseDatabase.DefaultInstance.GetReference("location");
 
 
         String tempLocation=PlayerPrefs.GetString("LocationID").ToString();
-        //tempLocation = "location9";
+        //tempLocation = "location3";
         _location = GameObject.Find(tempLocation);
         _destination = _location.transform;
         _navMeshAgent = this.GetComponent<NavMeshAgent>();
@@ -71,17 +74,18 @@ public class NavMeshMove : MonoBehaviour {
 
     void Update()
     {
-        
-        if(turnCnt==1)
+       
+        if (turnCnt==1)
         {
             
-            changeRotation(1);
+            changeRotation();
             
-            Debug.Log("Distance :"+Vector3.Distance(rot, rot2));
+            //Debug.Log("Distance :"+Vector3.Distance(rot, rot2));
             
             if(Vector3.Distance(rot,rot2)<0.1)
             {
-                
+                turnSpeed = tempSpeed;
+                cntOnce = 1;
                 SetDestination();
                 turnCnt = 2;
             }
@@ -111,7 +115,7 @@ public class NavMeshMove : MonoBehaviour {
                             turnCnt = 3;
                         }
                         
-                        changeRotation(2);
+                        changeRotation();
 
                         if(Vector3.Distance(rot, rot2) < 0.1)
                         {
@@ -175,23 +179,27 @@ public class NavMeshMove : MonoBehaviour {
 
         rot = startMarker.rotation.eulerAngles;
         rot2 = new Vector3(rot.x, rot.y + 180, rot.z);
+        rotDestination = rot.y+(((rot2.y - rot.y) / 4) * 3);
         
     }
-
-    public void changeRotation(int situation)
+    
+    public void changeRotation()
     {
-        if(situation==1)
+       
+        if (rot.y > rotDestination)
         {
+            if (cntOnce == 1)
+            {
+               
+                turnSpeed = turnSpeed * 3.5f;
+                cntOnce = 0;
+            }
             
-            rot = Vector3.Lerp(rot, rot2, turnSpeed);
-            startMarker.rotation = Quaternion.Euler(rot);
-
+                
         }
-        else if(situation==2)
-        {
-            rot = Vector3.Lerp(rot, rot2, turnSpeed);
-            startMarker.rotation = Quaternion.Euler(rot);
-        }
+        rot = Vector3.Lerp(rot, rot2, turnSpeed);
+        startMarker.rotation = Quaternion.Euler(rot);
+        
 
     }
 
@@ -242,7 +250,7 @@ public class NavMeshMove : MonoBehaviour {
         }
         if(textIterator==greetingText.Length)
         {
-            if(Math.Abs(Time.time - textTimer)>7f)
+            if((int)(Math.Abs(Time.time - textTimer))>3)
             {
                //Debug.Log("Now :"+Time.time);
                //Debug.Log("Past :" + textTimer);
@@ -253,7 +261,7 @@ public class NavMeshMove : MonoBehaviour {
         }
         else
         {
-            if (Math.Abs(Time.time - textTimerStart) > 0.008)
+            if (Math.Abs(Time.time - textTimerStart) > 0.1f)
             {
                 text.text += greetingText[textIterator];
                 textIterator += 1;

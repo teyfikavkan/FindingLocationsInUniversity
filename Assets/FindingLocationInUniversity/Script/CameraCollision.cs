@@ -29,7 +29,7 @@ public class CameraCollision : MonoBehaviour {
 		Vector3 charToCam = camPos - charPos;
 
 		//int mapLayer = LayerMask.NameToLayer("Map");
-		int mapLayerMask = LayerMask.GetMask(new string[] { "Camera Wall" });
+		//int mapLayerMask = LayerMask.GetMask(new string[] { "Camera Wall" });
 
 
 		float distance = defaultCamDistance;
