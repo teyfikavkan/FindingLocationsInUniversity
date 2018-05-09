@@ -85,14 +85,9 @@ public class MoveCam : MonoBehaviour
 
                         rotSpeed = rotSpeed * 3.5f;
                         cntOnce = 0;
-                        fracJourney = fracJourney * 3.5f;
+                        //fracJourney = fracJourney * 3f;
                     }
-                    if (cntOnce == 2)
-                    {
-
-                        cntOnce = 3;
-                        fracJourney = fracJourney * 7f;
-                    }
+                    
 
 
                 }
@@ -114,11 +109,11 @@ public class MoveCam : MonoBehaviour
                 
                
                 
-                if (startMarker.rotation.x < 0.003f)
+                if (startMarker.position.x <= (-7.16))
                 {
                     greatingMessage();
 
-                    if (greetingMessageObj.transform.position.y == (float)-2.246)
+                    if (greetingMessageObj.transform.position.y == (float)-2.265)
                     {
 
                         if (startTimeCnt == 0)
