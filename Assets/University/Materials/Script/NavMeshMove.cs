@@ -37,38 +37,49 @@ public class NavMeshMove : MonoBehaviour {
 
     void Start()
     {
-        
-        startMarker = GameObject.Find("CamParent").transform;
-        image = GameObject.Find("SpeechBubbleImg");
-        image.SetActive(false);
-
-        turnCnt = 0;
-        timerCnt = 0;
-        textIterator = 0;
-        cntOnce = 1;
-        tempSpeed = turnSpeed;
-
-        FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://robotic-speech.firebaseio.com/");
-        db = FirebaseDatabase.DefaultInstance.GetReference("location");
-
-
-        String tempLocation=PlayerPrefs.GetString("LocationID").ToString();
-        //tempLocation = "location3";
-        _location = GameObject.Find(tempLocation);
-        _destination = _location.transform;
-        _navMeshAgent = this.GetComponent<NavMeshAgent>();
-
-        setRotation();
-        setGreetingText(1);
-        StartCoroutine(startInformation());
-
-
-        if (_navMeshAgent == null)
+         try
         {
-            Debug.LogError("Erorrrr");
-        }
+            startMarker = GameObject.Find("CamParent").transform;
+            image = GameObject.Find("SpeechBubbleImg");
+            image.SetActive(false);
 
+            turnCnt = 0;
+            timerCnt = 0;
+            textIterator = 0;
+            cntOnce = 1;
+            tempSpeed = turnSpeed;
+
+            FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://robotic-speech.firebaseio.com/");
+            db = FirebaseDatabase.DefaultInstance.GetReference("location");
+
+
+            String tempLocation=PlayerPrefs.GetString("LocationID").ToString();
        
+
+        
+            _location = GameObject.Find(tempLocation);
+            Debug.Log(" "+_location);
+            _destination = _location.transform;
+            _navMeshAgent = this.GetComponent<NavMeshAgent>();
+
+            setRotation();
+            setGreetingText(1);
+            StartCoroutine(startInformation());
+
+
+            if (_navMeshAgent == null)
+            {
+                Debug.LogError("Erorrrr");
+            }
+
+            }
+        catch (Exception)
+        {
+            db.SetValueAsync("nolocation");
+            db = FirebaseDatabase.DefaultInstance.GetReference("waitlocation");
+            db.SetValueAsync("no");
+            LoadMenu();
+        }
     }
 
 
@@ -124,7 +135,7 @@ public class NavMeshMove : MonoBehaviour {
                             {
                                 setGreetingText(2);
                                 turnCnt = 4;
-                                textTimer = Time.time;
+                                
                                 image.SetActive(true);
                                 
                             }
@@ -209,11 +220,11 @@ public class NavMeshMove : MonoBehaviour {
     {
         if (situation == 1)
         {
-            greetingText = "Merhaba, gitmek istediğiniz yer için yol gösterme sekansı başlatılıyor.............";
+            greetingText = "Merhaba, gitmek istediğiniz yer için yol gösterme sekansı başlatılıyor...";
         }
         else if (situation == 2)
         {
-            greetingText = "Gitmek istediğiniz laboratuvar burası. Hoşçakalın...............";
+            greetingText = "Gitmek istediğiniz laboratuvar burası. Hoşçakalın...";
         }
     }
 
@@ -228,7 +239,7 @@ public class NavMeshMove : MonoBehaviour {
             text.text += greetingText[i];
             yield return new WaitForSeconds(0.1f);
         }
-        //yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.8f);
         text.text = "";
         turnCnt = 1;
         image.SetActive(false);
@@ -249,7 +260,12 @@ public class NavMeshMove : MonoBehaviour {
         }
         if(textIterator==greetingText.Length)
         {
-            if((int)(Math.Abs(Time.time - textTimer))>3)
+            if(timerCnt==1)
+            {
+                textTimer = Time.time;
+                timerCnt = 2;
+            }
+            if((int)(Math.Abs(Time.time - textTimer))> 0.5f)
             {
               
                 image.SetActive(false);

@@ -15274,6 +15274,10 @@ Prefab:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4403160989727470, guid: 59cc47ee11ad87d4dadeb6c7d975a04a, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.5339709
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 59cc47ee11ad87d4dadeb6c7d975a04a, type: 2}
   m_IsPrefabParent: 0
@@ -33382,7 +33386,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1235309645}
-  m_Text: "\u0130ZM\u0130R EKONOM\u0130 \xDCN\u0130VERS\u0130TES\u0130\nTESLA LABORATUVARINA\nHO\u015E
+  m_Text: "\u0130ZM\u0130R EKONOM\u0130 \xDCN\u0130VERS\u0130TES\u0130\nTESLA B\u0130NASINA\nHO\u015E
     GELD\u0130N\u0130Z"
   m_OffsetZ: 0
   m_CharacterSize: 1

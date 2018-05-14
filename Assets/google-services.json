@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "145247734917",
+    "firebase_url": "https://robotic-speech.firebaseio.com",
+    "project_id": "robotic-speech",
+    "storage_bucket": "robotic-speech.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:145247734917:android:49fe489faca05431",
+        "android_client_info": {
+          "package_name": "com.yourcompany.flutterapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "145247734917-hhvhnq82fvc6tmetiboejptj4iitvc2o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yourcompany.flutterapp",
+            "certificate_hash": "b111db5d25010c980f6d7c4421ee78350b3d7779"
+          }
+        },
+        {
+          "client_id": "145247734917-fl0ssqgkkb81tuk8vg0hiteo684khhau.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZ8zAZRjKzdaygFwYa8e-jV5B-vGmnKgY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "145247734917-fl0ssqgkkb81tuk8vg0hiteo684khhau.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "145247734917-4f4atauc0ded7fep02f25tl20askmpmj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.findinglocationsinuniversity.ios"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,6 +1,6 @@
 WindowsStandalone
 PlayerPath?
-C:/Users/ASUS/Desktop/Desktop.exe
+C:/Users/ASUS/Desktop/IEU-Tesla-Simulation/IEU-Tesla-Simulation.exe
 SceneListBegin?
 Assets/University/Scenes/UniversityPerspective.unity
 Assets/University/Scenes/UniversityInside.unity
