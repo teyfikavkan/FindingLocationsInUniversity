@@ -228,7 +228,7 @@ public class NavMeshMove : MonoBehaviour {
     {
         if (situation == 1)
         {
-            greetingText = "Merhaba, gitmek istediğiniz yer için yol gösterme sekansı başlatılıyor...";
+            greetingText = "Merhaba, şimdi gitmek istediğiniz yere nasıl gidileceğini göstereceğim   ...";
         }
         else if (situation == 2)
         {
@@ -247,7 +247,7 @@ public class NavMeshMove : MonoBehaviour {
             text.text += greetingText[i];
             yield return new WaitForSeconds(0.1f);
         }
-        yield return new WaitForSeconds(1.2f);
+        yield return new WaitForSeconds(1.6f);
         text.text = "";
         turnCnt = 1;
         image.SetActive(false);
