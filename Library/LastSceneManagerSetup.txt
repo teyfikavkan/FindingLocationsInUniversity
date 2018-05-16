@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/University/Scenes/UniversityInside.unity
+- path: Assets/University/Scenes/UniversityPerspective.unity
   isLoaded: 1
   isActive: 1

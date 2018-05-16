@@ -11,7 +11,7 @@
       }, 
       "oauth_client": [
         {
-          "client_id": "145247734917-4f4atauc0ded7fep02f25tl20askmpmj.apps.googleusercontent.com"
+          "client_id": "145247734917-jf82d1n9f28a00d7o96s7obppcairs8k.apps.googleusercontent.com"
         }
       ], 
       "api_key": [
@@ -20,9 +20,9 @@
         }
       ], 
       "client_info": {
-        "mobilesdk_app_id": "1:145247734917:ios:aca8ab2d9e587c1d", 
+        "mobilesdk_app_id": "1:145247734917:ios:f6dec2a22b12f047", 
         "android_client_info": {
-          "package_name": "com.findinglocationsinuniversity.ios"
+          "package_name": "com.ieu.simulation"
         }
       }
     }

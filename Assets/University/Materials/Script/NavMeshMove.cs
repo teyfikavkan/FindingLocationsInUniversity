@@ -49,6 +49,7 @@ public class NavMeshMove : MonoBehaviour {
             cntOnce = 1;
             tempSpeed = turnSpeed;
 
+           
             FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://robotic-speech.firebaseio.com/");
             db = FirebaseDatabase.DefaultInstance.GetReference("location");
 
@@ -85,88 +86,95 @@ public class NavMeshMove : MonoBehaviour {
 
     void Update()
     {
-       
-        if (turnCnt==1)
+        try
         {
+
+        
+            if (turnCnt==1)
+            {
             
-            changeRotation();
+                changeRotation();
            
            
-            if(Vector3.Distance(rot,rot2)<0.1)
-            {
-                turnSpeed = tempSpeed;
-                cntOnce = 1;
-                SetDestination();
-                turnCnt = 2;
-            }
-            
-        }
-      
-        else if(turnCnt==2 || turnCnt==3 )
-        {
-            
-            Transform _startdestination = _navMeshAgent.transform;
-            
-            if(Mathf.Approximately(_navMeshAgent.transform.position.x , _destination.transform.position.x))
-            {
-                
-                
-                if(Mathf.Approximately(_navMeshAgent.transform.position.z,_destination.transform.position.z))
+                if(Vector3.Distance(rot,rot2)<0.1)
                 {
-                    
-                    if (Mathf.Approximately(_navMeshAgent.transform.position.y, _destination.transform.position.y))
-                    {
-                        
-                        
-                        if (turnCnt==2)
-                        {
-                            
-                            setRotation();
-                            turnCnt = 3;
-                        }
-                        
-                        changeRotation();
-
-                        if(Vector3.Distance(rot, rot2) < 0.1)
-                        {
-                            
-
-                            if(turnCnt==3)
-                            {
-                                setGreetingText(2);
-                                turnCnt = 4;
-                                
-                                image.SetActive(true);
-                                
-                            }
-                            
-                            
-                        }
-
-                        
-                        
-                    }
+                    turnSpeed = tempSpeed;
+                    cntOnce = 1;
+                    SetDestination();
+                    turnCnt = 2;
                 }
+            
+            }
+      
+            else if(turnCnt==2 || turnCnt==3 )
+            {
+            
+                Transform _startdestination = _navMeshAgent.transform;
+            
+                if(Mathf.Approximately(_navMeshAgent.transform.position.x , _destination.transform.position.x))
+                {
+                
+                
+                    if(Mathf.Approximately(_navMeshAgent.transform.position.z,_destination.transform.position.z))
+                    {
+                    
+                        if (Mathf.Approximately(_navMeshAgent.transform.position.y, _destination.transform.position.y))
+                        {
+                        
+                        
+                            if (turnCnt==2)
+                            {
+                            
+                                setRotation();
+                                turnCnt = 3;
+                            }
+                        
+                            changeRotation();
+
+                            if(Vector3.Distance(rot, rot2) < 0.1)
+                            {
+                            
+
+                                if(turnCnt==3)
+                                {
+                                    setGreetingText(2);
+                                    turnCnt = 4;
+                                
+                                    image.SetActive(true);
+                                
+                                }
+                            
+                            
+                            }
+
+                        
+                        
+                        }
+                    }
            
             
             
+                }
             }
-        }
 
-        else if(turnCnt==4)
+            else if(turnCnt==4)
+            {
+                endInformation();
+            }
+            else if(turnCnt==5)
+            {
+                db.SetValueAsync("nolocation");
+                db = FirebaseDatabase.DefaultInstance.GetReference("waitlocation");
+                db.SetValueAsync("no");
+                LoadMenu();
+            }
+
+
+            }
+        catch(Exception)
         {
-            endInformation();
-        }
-        else if(turnCnt==5)
-        {
-            db.SetValueAsync("nolocation");
-            db = FirebaseDatabase.DefaultInstance.GetReference("waitlocation");
-            db.SetValueAsync("no");
             LoadMenu();
         }
-        
-
-
     }
 
     
@@ -239,7 +247,7 @@ public class NavMeshMove : MonoBehaviour {
             text.text += greetingText[i];
             yield return new WaitForSeconds(0.1f);
         }
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(1.2f);
         text.text = "";
         turnCnt = 1;
         image.SetActive(false);
@@ -265,7 +273,7 @@ public class NavMeshMove : MonoBehaviour {
                 textTimer = Time.time;
                 timerCnt = 2;
             }
-            if((int)(Math.Abs(Time.time - textTimer))> 0.5f)
+            if((int)(Math.Abs(Time.time - textTimer))> 0.9f)
             {
               
                 image.SetActive(false);

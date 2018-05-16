@@ -7,6 +7,7 @@ using Firebase;
 using Firebase.Unity.Editor;
 using Firebase.Database;
 
+
 public class MoveCam : MonoBehaviour
 {
     public Transform startMarker;
@@ -33,31 +34,38 @@ public class MoveCam : MonoBehaviour
     private int cntOnce;
 
     private DatabaseReference db;
-    
 
     //PlayerPrefs.GetString("PlayerName").ToString();
     //db.SetValueAsync("nolocation");
 
     void Start()
     {
-        tempHasLocation = "nolocation";
-        startCnt = 0;
-        greetingCnt = 0;
-        startTimeCnt = 0;
-       
-        FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://robotic-speech.firebaseio.com/");
-        db = FirebaseDatabase.DefaultInstance.GetReference("location");
+        try
+        {
 
-        rot = startMarker.rotation.eulerAngles;
-        rot2 = new Vector3(0, 0, 0);
-        rotSpeed = 0.009f;
-        cntOnce = 1;
+            FirebaseApp.Create();
+            tempHasLocation = "nolocation";
+            startCnt = 0;
+            greetingCnt = 0;
+            startTimeCnt = 0;
 
-        journeyLength = Vector3.Distance(startMarker.position, endMarker.position);
+            FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://robotic-speech.firebaseio.com/");
+            db = FirebaseDatabase.DefaultInstance.GetReference("location");
+
+            rot = startMarker.rotation.eulerAngles;
+            rot2 = new Vector3(0, 0, 0);
+            rotSpeed = 0.009f;
+            cntOnce = 1;
+
+            journeyLength = Vector3.Distance(startMarker.position, endMarker.position);
    
 
-        rotDestination = rot.x + (((rot2.x - rot.x) / 4) * 3);
-        
+            rotDestination = rot.x + (((rot2.x - rot.x) / 4) * 3);
+        }
+        catch(Exception)
+        {
+
+        }
     }
 
     void Update()
@@ -200,7 +208,6 @@ public class MoveCam : MonoBehaviour
     }
 
     
-
 
 
 

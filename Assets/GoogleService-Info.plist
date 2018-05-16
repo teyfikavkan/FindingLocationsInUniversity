@@ -7,9 +7,9 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>145247734917-4f4atauc0ded7fep02f25tl20askmpmj.apps.googleusercontent.com</string>
+	<string>145247734917-jf82d1n9f28a00d7o96s7obppcairs8k.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.145247734917-4f4atauc0ded7fep02f25tl20askmpmj</string>
+	<string>com.googleusercontent.apps.145247734917-jf82d1n9f28a00d7o96s7obppcairs8k</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDeMEnAz6-wAjMxzf29s1rTnfyjVhx8x1o</string>
 	<key>GCM_SENDER_ID</key>
@@ -17,7 +17,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.findinglocationsinuniversity.ios</string>
+	<string>com.ieu.simulation</string>
 	<key>PROJECT_ID</key>
 	<string>robotic-speech</string>
 	<key>STORAGE_BUCKET</key>
@@ -33,7 +33,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:145247734917:ios:aca8ab2d9e587c1d</string>
+	<string>1:145247734917:ios:f6dec2a22b12f047</string>
 	<key>DATABASE_URL</key>
 	<string>https://robotic-speech.firebaseio.com</string>
 </dict>
